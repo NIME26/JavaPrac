@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -93,14 +94,15 @@ public class DatumTest {
 	 */
 	
 	@Test
-	public void lessThan_Test_Todays_Value(){
-		Date d=new Date();
+	public void lessThan_Test_Todays_Value() throws NullPointerException {
+		Date d=getDateValue_Random();
 		Boolean a=false;
+		try{
 		a=Tester.lessThan(d);
-		if(a==false){
-			
-		}else{
-			System.out.println("Test2 lessThan has failed");
+		}
+		catch(Exception e){
+			System.out.println("Test2 lessThan has failed:");
+			System.out.println(e);
 		}
 		
 	}
@@ -196,5 +198,79 @@ public class DatumTest {
             e.printStackTrace();
         }
     }
-
+	
+	/**
+	 * 
+	 * Get Random date
+	 * 
+	 */
+	public Date getDateValue_Random() {
+		int Year= (1970+(int) (Math.random()*((2050-1970)+1)));
+		int Month=(int) (Math.random()*12);
+		int Day=1;
+		int schrikkeljaar;
+		switch (Month){
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				Day=(int) (Math.random()*31);
+				break;
+			case 2:
+				schrikkeljaar=Year;
+				while(schrikkeljaar>400){
+					schrikkeljaar-=400;
+				}	
+				if (schrikkeljaar==400){
+					Day=(int)(Math.random()*29);
+				}else{
+					schrikkeljaar=Year;
+					while(schrikkeljaar>100){
+						schrikkeljaar-=100;
+					}
+					if(schrikkeljaar==100){
+						Day=(int)(Math.random()*28);
+					}else{
+						schrikkeljaar=Year;
+						while(schrikkeljaar>4){
+							schrikkeljaar-=4;
+						}
+						if(schrikkeljaar==4){
+							Day=(int)(Math.random()*29);
+						}else{
+							Day=(int)(Math.random()*28);
+						}
+					}
+					
+				}
+				break;
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				Day=(int)Math.random()*30;
+				break;
+		}
+			
+		System.out.println("Test random datum");
+		String startDateString = Integer.toString(Year)+"-"+Integer.toString(Month)+"-"+Integer.toString(Day);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+        Date startDate=null;
+        String newDateString = null;
+        try 
+        {
+            startDate = df.parse(startDateString);
+            newDateString = df.format(startDate);
+            System.out.println("startdate: "+startDate);
+            System.out.println("newdatestring: "+newDateString);
+            System.out.println("startdatestring: "+startDateString);
+        } catch (ParseException e) 
+        {
+            e.printStackTrace();
+        }
+		return startDate;
+    }
 }
