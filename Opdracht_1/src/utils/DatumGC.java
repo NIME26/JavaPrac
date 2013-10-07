@@ -43,6 +43,34 @@ public class DatumGC {
 	 * @param day
 	 */
 	public DatumGC(int year,int month,int day)throws IllegalArgumentException{
+		int[] month31 = {1,3,5,7,8,10,12};
+		int[] month30 = {4,6,9,11};
+		GregorianCalendar g = new GregorianCalendar();
+		
+		if (year < 0 || year > 9999)throw new IllegalArgumentException("Jaar verkeerd!");
+		if (month < 1 || month > 12)throw new IllegalArgumentException("Maand verkeerd!");
+		
+		for (int a : month31) {
+			if (month == a) {
+				if (day < 1 || day > 31)throw new IllegalArgumentException("Dag verkeerd!");
+			}
+		}
+		
+		for (int a : month30) {
+			if (month == a) {
+				if (day < 1 || day > 30)throw new IllegalArgumentException("Dag verkeerd!");
+			}
+		}
+		
+		if (month == 2) {
+			if (g.isLeapYear(year)){
+				if (day < 1 || day > 29)throw new IllegalArgumentException("Dag verkeerd!");
+			}
+			else {
+				if (day < 1 || day > 28)throw new IllegalArgumentException("Dag verkeerd!");
+			}
+		}
+		
 		gregCal = new GregorianCalendar(year,month-1,day);
 	}
 	
@@ -55,12 +83,13 @@ public class DatumGC {
 		Scanner s = new Scanner(string);
 		s.useDelimiter("\\s*/\\s*");
 		int d = s.nextInt();
-		int m = s.nextInt();
+		String mS = s.next();
+		int m = Integer.parseInt(mS);
 		int y = s.nextInt();
 		s.close();
 		
 		if (String.valueOf(d).length() != 1 && String.valueOf(d).length() != 2)throw new IllegalArgumentException ("Dag is fout ingevuld");
-		if (String.valueOf(m).length() != 2)throw new IllegalArgumentException ("Maand is fout ingevuld");
+		if (mS.length() != 2)throw new IllegalArgumentException ("Maand is fout ingevuld");
 		if (String.valueOf(y).length() != 4)throw new IllegalArgumentException ("Jaar is fout ingevuld");
 		
 		gregCal = new GregorianCalendar(y,m-1,d);
@@ -102,34 +131,7 @@ public class DatumGC {
 	 * 
 	 * @param gregCal
 	 */
-	public void setGregCal(GregorianCalendar gregCal) {
-		int[] month31 = {1,3,5,7,8,10,12};
-		int[] month30 = {4,6,9,11};
-		
-		if (gregCal.get(Calendar.YEAR) < 0 || gregCal.get(Calendar.YEAR) > 9999)throw new IllegalArgumentException("Jaar verkeerd!");;
-		if (gregCal.get(Calendar.MONTH) < 1 || gregCal.get(Calendar.MONTH) > 12)throw new IllegalArgumentException("Maand verkeerd!");;
-		
-		for (int a : month31) {
-			if (gregCal.get(Calendar.MONTH) == a) {
-				if (gregCal.get(Calendar.DAY_OF_MONTH) < 1 || gregCal.get(Calendar.DAY_OF_MONTH) > 31)throw new IllegalArgumentException("Dag verkeerd!");
-			}
-		}
-		
-		for (int a : month30) {
-			if (gregCal.get(Calendar.MONTH) == a) {
-				if (gregCal.get(Calendar.DAY_OF_MONTH) < 1 || gregCal.get(Calendar.DAY_OF_MONTH) > 30)throw new IllegalArgumentException("Dag verkeerd!");
-			}
-		}
-		
-		if (gregCal.get(Calendar.MONTH) == 2) {
-			if (gregCal.isLeapYear(gregCal.get(Calendar.YEAR))){
-				if (gregCal.get(Calendar.DAY_OF_MONTH) < 1 || gregCal.get(Calendar.DAY_OF_MONTH) > 29)throw new IllegalArgumentException("Dag verkeerd!");
-			}
-			else {
-				if (gregCal.get(Calendar.DAY_OF_MONTH) < 1 || gregCal.get(Calendar.DAY_OF_MONTH) > 28)throw new IllegalArgumentException("Dag verkeerd!");
-			}
-		}
-		
+	public void setGregCal(GregorianCalendar gregCal){
 		this.gregCal = gregCal;
 	}
 	
