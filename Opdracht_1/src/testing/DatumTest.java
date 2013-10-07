@@ -205,7 +205,7 @@ public class DatumTest {
 	 * 
 	 */
 	public Date getDateValue_Random() {
-		int Year= (1970+(int) (Math.random()*((2050-1970)+1)));
+		int Year= ((int) (Math.random()*(2050+1)));
 		int Month=(int) (Math.random()*12);
 		int Day=1;
 		int schrikkeljaar;
