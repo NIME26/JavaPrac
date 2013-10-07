@@ -127,14 +127,16 @@ public class Datum implements Comparable<Datum> {
 	{
 		return String.format("%d;%d:%d", this.dag,this.maand,this.jaar);
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
+	
 	@Override
-	public int compareTo(Datum o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean equals(Datum obj) {
+		if(this.jaar != obj.jaar)
+			return false;
+		if(this.maand != obj.maand)
+			return false;
+		if(this.dag != obj.dag)
+			return false;
+	}
 	}
 
 }
