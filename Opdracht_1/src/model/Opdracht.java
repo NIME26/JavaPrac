@@ -42,9 +42,9 @@ public class Opdracht implements Comparable<Opdracht>{
 	public Opdracht() throws IllegalArgumentException{
 		this.setQuestion("leeg");
 		this.setCorrectAnswer("leeg");
-		this.setAnswerHints(new String[]{"leeg"});
+		this.setAnswerHints(new String[]{});
 		this.setMaxNumberOfAttempts(1);
-		this.setMaxAnswerTime(1);
+		this.setMaxAnswerTime(0);
 		this.setCategorie(Opdracht.OpdrachtCategorie.ALGEMENEKENNIS);
 		this.setAuteur(Leraar.BAKKER);
 		this.setQuizzen(new ArrayList<Quiz>());
@@ -170,7 +170,6 @@ public class Opdracht implements Comparable<Opdracht>{
 	 */
 	public void setAnswerHints(String[] answerHints) throws IllegalArgumentException{
 		if (answerHints == null)throw new IllegalArgumentException("Antwoord hints verzameling is null");
-		if (answerHints.length == 0)throw new IllegalArgumentException("Antwoord hints verzameling is leeg");
 		this.answerHints = answerHints;
 	}
 
@@ -190,7 +189,7 @@ public class Opdracht implements Comparable<Opdracht>{
 	 * @param maxAnswerTime
 	 */
 	public void setMaxAnswerTime(int maxAnswerTime) throws IllegalArgumentException{
-		if (maxAnswerTime <= 0)throw new IllegalArgumentException("Max antwoord tijd kan niet 0 of negatief zijn!");
+		if (maxAnswerTime < 0)throw new IllegalArgumentException("Max antwoord tijd kan niet 0 of negatief zijn!");
 		this.maxAnswerTime = maxAnswerTime;
 	}
 

@@ -120,11 +120,6 @@ public class OpdrachtTest {
 		opdracht.setAnswerHints(null);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void test_setAnswerHints_Exception_If_Parameter_Is_Empty() {
-		opdracht.setAnswerHints(new String[]{});
-	}
-	
 	// setQuizzen
 	
 	@Test
@@ -167,11 +162,6 @@ public class OpdrachtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test_setMaxAnswerTime_Exception_If_Parameter_Is_Negative() {
 		opdracht.setMaxAnswerTime(-10);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void test_setMaxAnswerTime_Exception_If_Parameter_Is_0() {
-		opdracht.setMaxAnswerTime(0);
 	}
 	
 	// setDatumRegistratie
