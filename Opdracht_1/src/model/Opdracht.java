@@ -52,7 +52,7 @@ public class Opdracht implements Comparable<Opdracht>{
 	}
 	
 	/**
-	 * Constructor with 6 params
+	 * Constructor with 9 params
 	 * 
 	 * @param question
 	 * @param correctAnswer
@@ -218,7 +218,7 @@ public class Opdracht implements Comparable<Opdracht>{
 	 * 
 	 * @param quizzen
 	 */
-	public void setQuizzen(List<Quiz> quizzen) {
+	public void setQuizzen(List<Quiz> quizzen) throws IllegalArgumentException{
 		if (quizzen == null)throw new IllegalArgumentException("Quizzen verzameling is null!");
 		this.quizzen = quizzen;
 	}
@@ -228,7 +228,7 @@ public class Opdracht implements Comparable<Opdracht>{
 	 * 
 	 * @param datumRegistratie
 	 */
-	public void setDatumRegistratie(DatumGC datumRegistratie) {
+	public void setDatumRegistratie(DatumGC datumRegistratie) throws IllegalArgumentException{
 		if (datumRegistratie == null)throw new IllegalArgumentException("Datum is null");
 		this.datumRegistratie = datumRegistratie;
 	}
@@ -280,9 +280,6 @@ public class Opdracht implements Comparable<Opdracht>{
 				+ ((categorie == null) ? 0 : categorie.hashCode());
 		result = prime * result
 				+ ((correctAnswer == null) ? 0 : correctAnswer.hashCode());
-		result = prime
-				* result
-				+ ((datumRegistratie == null) ? 0 : datumRegistratie.hashCode());
 		result = prime * result + maxAnswerTime;
 		result = prime * result + maxNumberOfAttempts;
 		result = prime * result
@@ -310,11 +307,6 @@ public class Opdracht implements Comparable<Opdracht>{
 			if (other.correctAnswer != null)
 				return false;
 		} else if (!correctAnswer.equals(other.correctAnswer))
-			return false;
-		if (datumRegistratie == null) {
-			if (other.datumRegistratie != null)
-				return false;
-		} else if (!datumRegistratie.equals(other.datumRegistratie))
 			return false;
 		if (maxAnswerTime != other.maxAnswerTime)
 			return false;
