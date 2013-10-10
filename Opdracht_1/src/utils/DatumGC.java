@@ -180,9 +180,7 @@ public class DatumGC {
 	 * @param days
 	 */
 	public void changeDate(int days) {
-		long currentMillis = gregCal.getTimeInMillis();
-		long daysMillis = 86400000L * days;
-		gregCal.setTimeInMillis(currentMillis + daysMillis);
+		gregCal.add(Calendar.DAY_OF_MONTH, days);
 	}
 	
 	/**
@@ -195,30 +193,5 @@ public class DatumGC {
 		Date d = new Date();
 		d.setTime(gregCal.getTimeInMillis() + (86400000L * days));
 		return d;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((gregCal == null) ? 0 : gregCal.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DatumGC other = (DatumGC) obj;
-		if (gregCal == null) {
-			if (other.gregCal != null)
-				return false;
-		} else if (!gregCal.equals(other.gregCal))
-			return false;
-		return true;
 	}
 }
